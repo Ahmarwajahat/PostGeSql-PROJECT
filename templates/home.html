@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Manager Pro | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #4cc9f0;
+            --danger: #f72585;
+            --success: #2ecc71;
+            --warning: #f8961e;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #8d99ae;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: backwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card:hover::before {
+            height: 10px;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #3aa8d8;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e5177e;
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-database logo-icon"></i>
+                <h1>DB Manager Pro</h1>
+            </div>
+            <p class="subtitle">
+                The ultimate database management solution with intuitive controls, real-time analytics, 
+                and seamless user experience for all your data needs.
+            </p>
+        </header>
+
+        <!-- Stats Bar (you can make this dynamic with actual stats later) -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="user-count">0</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="post-count">0</div>
+                <div class="stat-label">Total Posts</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="activity-count">0</div>
+                <div class="stat-label">Daily Activity</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <i class="fas fa-user-plus card-icon"></i>
+                <h2>Add New User</h2>
+                <p>
+                    Create new user accounts with detailed profiles and 
+                    associate multiple posts with each user in one seamless operation.
+                </p>
+                <a href="/insert" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add User
+                </a>
+            </div>
+            
+            <div class="card">
+                <i class="fas fa-users card-icon"></i>
+                <h2>View All Users</h2>
+                <p>
+                    Browse through all registered users with their complete details 
+                    and associated posts in a beautifully organized interface.
+                </p>
+                <a href="/users" class="btn btn-secondary">
+                    <i class="fas fa-list"></i> View Users
+                </a>
+            </div>
+            
+            <div class="card">
+                <i class="fas fa-user-times card-icon"></i>
+                <h2>Manage Users</h2>
+                <p>
+                    Securely remove users and all their associated data from the system 
+                    with comprehensive confirmation dialogs.
+                </p>
+                <a href="/delete" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Delete Users
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 DB Manager Pro | Powered by Flask and PostgreSQL | v2.0</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple counter animation for stats
+        function animateValue(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Start animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // These values should come from your backend in a real app
+            animateValue("user-count", 0, 42, 1500);
+            animateValue("post-count", 0, 128, 1500);
+            animateValue("activity-count", 0, 15, 1500);
+        });
+    </script>
+</body>
+</html>

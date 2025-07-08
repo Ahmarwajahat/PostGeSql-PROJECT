@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user[1] }} | DB Manager Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --danger: #f72585;
+            --success: #4cc9f0;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #8d99ae;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .user-info h1 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .user-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .status-badge.inactive {
+            background-color: rgba(247, 37, 133, 0.1);
+            color: var(--danger);
+        }
+
+        .posts-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            font-size: 1.2rem;
+        }
+
+        .post-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content {
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .post-views {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .no-posts {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            color: var(--gray);
+            box-shadow: var(--shadow);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #e5177e;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .user-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+            
+            .action-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-header">
+            <div class="user-avatar">
+                {{ user[1][0]|upper }}
+            </div>
+            <div class="user-info">
+                <h1>{{ user[1] }}</h1>
+                <div class="user-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-envelope"></i>
+                        {{ user[2] }}
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        Joined {{ format_datetime(user[3]) }}
+                    </div>
+                    <div class="status-badge {% if user[4] != 'active' %}inactive{% endif %}">
+                        <i class="fas fa-circle"></i>
+                        {{ user[4]|capitalize }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-btns">
+            <a href="/users" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Back to Users
+            </a>
+            <a href="/delete?email={{ user[2] }}" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete User
+            </a>
+        </div>
+
+        <div class="posts-section">
+            <h2 class="section-title">
+                <i class="fas fa-file-alt"></i>
+                User Posts ({{ posts|length }})
+            </h2>
+
+            {% if posts %}
+                {% for post in posts %}
+                <div class="post-card">
+                    <h3 class="post-title">{{ post[1] }}</h3>
+                    <p class="post-content">{{ post[2] }}</p>
+                    <div class="post-meta">
+                        <div>
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ format_datetime(post[3]) }}
+                        </div>
+                        <div class="post-views">
+                            <i class="fas fa-eye"></i>
+                            {{ post[4] }} view{{ 's' if post[4] != 1 else '' }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-posts">
+                    <i class="fas fa-file-alt" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>This user hasn't created any posts yet.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <a href="/users" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to All Users
+        </a>
+    </div>
+</body>
+</html>
